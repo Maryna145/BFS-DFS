@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Побудова Графа за Матрицею</title>
+    <script
+      type="text/javascript"
+      src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"
+    ></script>
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+    <h3 style="text-align: center;">Лабораторна робота №4. Обхід в ширину(хвильовий алгоритм). Обхід в глибину.</h1>
+    <h3 style="text-align: center;">Автор: Воскобой Марина, Тищенко Дарія ПІ-231</h1>
+    <div class="controls">
+      <div class="matrix">
+        <div class="firstm">
+          <h2>Матриця суміжності:</h3>
+            <textarea id="matrixInput1" rows="10" cols="20">
+0 1 1 0 0 0 0 0 0 0
+1 0 0 1 1 0 0 0 0 0
+1 0 0 0 0 1 1 0 0 0
+0 1 0 0 0 0 0 0 0 0
+0 1 0 0 0 0 0 1 0 0
+0 0 1 0 0 0 0 0 1 1
+0 0 1 0 0 0 0 0 0 0
+0 0 0 0 1 0 0 0 0 0
+0 0 0 0 0 1 0 0 0 0
+0 0 0 0 0 1 0 0 0 0
+            </textarea>
+        </div>
+      <div class="div2">
+          <input type="radio" id="undirected" name="graphType" value="undirected" checked />
+          <label for="undirected" class="label">Неорієнтований граф</label>
+
+          <input type="radio" id="directed" name="graphType" value="directed" />
+          <label for="directed" class="label">Орієнтований граф</label>
+         
+          <label for="startNode" class="label">Почати з вершини</label>
+          <input  class="vertexChoose"type="text" id="startNode"min="1" placeholder="Введіть номер вершини"/>
+      </div>
+      <div>
+        <button onclick="buildGraph()">Побудувати Граф</button>
+        <button onclick="bfsTraversal()">Обхід в ширину</button>
+        <button onclick="buildGraph()">Обхід в глибину</button>
+        <button onclick="Clean()">Очистити</button>
+      </div>
+    </div>
+
+    <div id="mynetwork"></div>
+    <div id="bfsOutput"></div>
+    <script src="./script.js"></script>
+  </body>
+</html>
