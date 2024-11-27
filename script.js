@@ -106,12 +106,49 @@ function bfsTraversal() {
   }
 
   // Виводимо список відвіданих вершин
-  document.getElementById("bfsOutput").textContent = "Порядок обходу: " + visitedList.join(", ");
+  document.getElementById("bfsOutput").textContent = "Порядок обходу в ширину: " + visitedList.join(", ");
 }
 
 
 //обхід в глибину
+function dfsTraversal() {
+//початкова вершина
+let startNode = parseInt(document.getElementById("startNode").value);
+if (isNaN(startNode) || startNode < 1 || startNode > nodes.length) {
+  alert("Введіть коректну початкову вершину.");
+  return;
+}
 
+let visited = new Set(); //для унікальних відвіданих вершин
+let stack = [startNode]; //стек для DFS
+let visitedList = []; //порядок відвідування
+let order = 1; //номер проходу
+
+//DFS
+while (stack.length > 0) {
+  let currentNode = stack.pop(); //беремо вершину зі стеку
+
+  if (!visited.has(currentNode)) {
+    visited.add(currentNode); //позначаємо як відвідану
+    visitedList.push(currentNode);
+
+    //оновлюємо мітку вузла з номером проходу
+    nodes.update({ id: currentNode, label: "x" + currentNode + " (" + order + ")" });
+    order++;
+
+    //додаємо сусідні вузли до стеку
+    edges.forEach((edge) => {
+      if (edge.from === currentNode && !visited.has(edge.to)) {
+        stack.push(edge.to); //додаємо сусіда у стек
+      } else if (edge.to === currentNode && !visited.has(edge.from)) {
+        stack.push(edge.from);
+      }
+    });
+  }
+}
+//виводимо список відвіданих вершин
+document.getElementById("dfsOutput").textContent = "Порядок обходу в глибину: " + visitedList.join(", ");
+}
 
 //побудова графа при завантаженні сторінки
 window.onload = buildGraph;
